@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Film;
 use Illuminate\Http\Request;
 use Validator;
-// use Illuminate\Support\Facades\Validator;
+
 use function PHPUnit\Framework\returnArgument;
 
 class FilmController extends Controller
@@ -47,9 +47,9 @@ public function show($id)
                 
                 $validator = Validator::make($request->all(), [
                     'film_id' => 'sometimes|nullable|integer',
-                    'Title'=> 'required',
-                    'Release_date' => 'required',
-                    'Company' => 'required',
+                    'Title' => 'sometimes|required|string|max:255',
+                    'Release_date' => 'sometimes|required|date',
+                    'Company' => 'sometimes|required|string|max:255',
                 ]);
 
                 if ($validator-> fails()) {
@@ -88,9 +88,10 @@ public function show($id)
                 }
 
                 $validator = Validator::make($request->all(), [
-                    'Title' => 'required',
-                    'Release_date' => 'required',
-                    'Company' => 'required'
+                    'film_id' => 'sometimes|nullable|integer',
+                    'Title' => 'sometimes|required|string|max:255',
+                    'Release_date' => 'sometimes|required|date',
+                    'Company' => 'sometimes|required|string|max:255',
                 ]);
 
                 if ($validator->fails()) {
